@@ -10,5 +10,8 @@
         "emailAlreadyExists": "L'email existe déjà",
         "userNotFound": "Utilisateur non trouvé",
         "invalidPassword": "Mot de passe invalide",
+    },
+    "story": {
+        "header": "Histoire",
     }
 }
