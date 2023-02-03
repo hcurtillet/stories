@@ -23,20 +23,15 @@ export const StartScreen = () => {
         });
     }, [loading]);
 
-    if (loading) {
-        // sleep for 2 seconds
-        return (
-            <ScreenContainer>
-                <Loader />
-            </ScreenContainer>
-        );
-    }
-
     if (!user) {
         navigation.navigate(routes.login);
     } else {
         navigation.navigate(routes.app);
     }
 
-    return <></>;
+    return (
+        <ScreenContainer>
+            <Loader />
+        </ScreenContainer>
+    );
 };

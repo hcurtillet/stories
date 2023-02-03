@@ -1,6 +1,7 @@
 export * from './button';
 export * from './datePicker';
 export * from './errorMessage';
+export * from './header';
 export * from './loader';
 export * from './loginForm';
 export * from './signUpForm';
