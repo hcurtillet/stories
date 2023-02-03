@@ -1,2 +1,3 @@
 import { authentication } from './authentication';
-export default { authentication };
+import { story } from './story';
+export default { authentication, story };

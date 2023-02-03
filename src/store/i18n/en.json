@@ -11,8 +11,32 @@
         "userNotFound": "User not found",
         "invalidPassword": "Invalid password",
     },
+    "common": {
+        "ok": "Ok",
+        "cancel": "Cancel",
+        "save": "Save",
+        "delete": "Delete",
+        "edit": "Edit",
+        "close": "Close",
+        "add": "Add",
+        "yes": "Yes",
+        "no": "No",
+        "areYouSure": "Are you sure?",
+    },
     "story": {
         "header": "Story",
-    }
+        "newStory": "New Story",
+        "title": "Title",
+        "description": "Description",
+        "errorMessage": {
+            "titleIsRequired": "Title is required",
+            "descriptionIsRequired": "Description is required",
+            "errorWhileCreatingStory": "Error while creating story",
+        },
+    },
+    "stories": {
+        "header": "Stories",
+        "noStories": "No stories",
+    },
 
 }
