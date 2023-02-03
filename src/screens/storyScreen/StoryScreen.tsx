@@ -3,29 +3,36 @@ import { Text, TouchableOpacity } from 'react-native';
 import { colors, ScreenContainer } from '@styles';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
-import { Header } from '@components';
 import Icon from 'react-native-vector-icons/Feather';
+import { StoryTabNavigationProp } from '@types';
+import { routes } from '@components';
 
 export const StoryScreen = () => {
     const { t } = useTranslation();
-    const navigation = useNavigation();
+    const navigation = useNavigation<StoryTabNavigationProp>();
 
     useEffect(() => {
+        const title = t('story.header');
         navigation.setOptions({
-            headerTitle: () => (
-                <Header
-                    leftComponent={stories}
-                    title={t('story.header')}
-                    rightComponent={addPost}
-                />
-            ),
+            headerLeft: stories,
+            headerRight: addPost,
+            headerTitleStyle: {
+                fontWeight: 'bold',
+                fontSize: 20,
+            },
+            title,
         });
-    }, [navigation, t]);
+    }, []);
 
     const stories = () => {
         return (
             <TouchableOpacity>
-                <Icon name={'book'} size={30} color={colors.blue} />
+                <Icon
+                    name={'book'}
+                    size={30}
+                    color={colors.blue}
+                    onPress={() => navigation.navigate(routes.stories)}
+                />
             </TouchableOpacity>
         );
     };

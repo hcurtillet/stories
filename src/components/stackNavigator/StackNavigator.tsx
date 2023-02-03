@@ -8,12 +8,16 @@ import {
     ProfileScreen,
     SignUpScreen,
     StartScreen,
+    StoriesScreen,
+    CreateStoryScreen,
 } from '@screens';
-import { RootStackParamList } from '@types';
+import { AppTabParamList, RootStackParamList, StoryTabParamList } from '@types';
 import Icon from 'react-native-vector-icons/Feather';
 
 const HomeStack = createNativeStackNavigator<RootStackParamList>();
-const AppTab = createBottomTabNavigator();
+const AppTab = createBottomTabNavigator<AppTabParamList>();
+
+const StoryStack = createNativeStackNavigator<StoryTabParamList>();
 
 export const StackNavigator = () => {
     return (
@@ -42,7 +46,7 @@ export const AppNavigator = () => {
                 tabBarIcon: ({ color, size }) => {
                     let iconName = '';
                     switch (route.name) {
-                        case routes.home:
+                        case routes.storyStack:
                             return (
                                 <Icon
                                     name={'book-open'}
@@ -50,25 +54,53 @@ export const AppNavigator = () => {
                                     color={color}
                                 />
                             );
-                        case routes.profile:
+                        case routes.profileStack:
                             return (
                                 <Icon name={'user'} size={size} color={color} />
                             );
                     }
                     return <Icon name={iconName} size={size} color={color} />;
                 },
+                headerShown: false,
             })}>
-            <AppTab.Screen name={routes.home} component={StoryScreen} />
-            <AppTab.Screen name={routes.profile} component={ProfileScreen} />
+            <AppTab.Screen
+                name={routes.storyStack}
+                component={StoryNavigator}
+            />
+            <AppTab.Screen
+                name={routes.profileStack}
+                component={ProfileScreen}
+            />
         </AppTab.Navigator>
+    );
+};
+
+const StoryNavigator = () => {
+    return (
+        <StoryStack.Navigator>
+            <StoryStack.Screen name={routes.story} component={StoryScreen} />
+            <StoryStack.Screen
+                name={routes.stories}
+                component={StoriesScreen}
+            />
+            <StoryStack.Screen
+                name={routes.createStory}
+                component={CreateStoryScreen}
+            />
+        </StoryStack.Navigator>
     );
 };
 
 export enum routes {
     app = 'App',
-    home = 'Story',
+    story = 'Story',
+    storyStack = 'StoryStack',
     login = 'Login',
     profile = 'Profile',
+    profileStack = 'ProfileStack',
     signUp = 'SignUp',
     start = 'Start',
+    stories = 'Stories',
+    addPost = 'AddPost',
+    createStory = 'CreateStory',
 }

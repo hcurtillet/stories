@@ -25,12 +25,12 @@ export const TextInput = (props: Props) => {
 const MyText = styled(Text)`
     color: ${colors.blue};
 `;
-const MyTextInput = styled(ReactTextInput)`
+const MyTextInput = styled(ReactTextInput)<{ multiline: boolean }>`
     border: 1px solid ${colors.blue};
     border-radius: 5px;
     padding: 10px;
     width: 100%;
-    height: 40px;
+    height: ${props => (props.multiline ? '100px' : '40px')};
     margin-bottom: 10px;
     margin-top: 5px;
 `;

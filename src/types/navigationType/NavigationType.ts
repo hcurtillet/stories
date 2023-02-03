@@ -17,8 +17,21 @@ export type RootScreenNavigationProp =
     NativeStackNavigationProp<RootStackParamList>;
 
 export type AppTabParamList = {
-    home: undefined;
-    profile: undefined;
+    StoryStack: undefined;
+    ProfileStack: undefined;
 };
+
+export type AppTabScreenNavigationProp =
+    NativeStackNavigationProp<AppTabParamList>;
+
+export type StoryTabParamList = {
+    Story: undefined;
+    Stories: undefined;
+    NewPost: undefined;
+    CreateStory: undefined;
+};
+
+export type StoryTabNavigationProp =
+    NativeStackNavigationProp<StoryTabParamList>;
 
 export type AppTabNavigationProp = NativeStackNavigationProp<AppTabParamList>;

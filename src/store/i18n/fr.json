@@ -11,7 +11,31 @@
         "userNotFound": "Utilisateur non trouvé",
         "invalidPassword": "Mot de passe invalide",
     },
+    "common": {
+        "ok": "OK",
+        "cancel": "Annuler",
+        "save": "Sauvegarder",
+        "delete": "Supprimer",
+        "edit": "Modifier",
+        "close": "Fermer",
+        "add": "Ajouter",
+        "yes": "Oui",
+        "no": "Non",
+        "areYouSure": "Êtes-vous sûr ?",
+    },
     "story": {
         "header": "Histoire",
-    }
+        "newStory": "Nouvelle histoire",
+        "title": "Titre",
+        "description": "Description",
+        "errorMessage": {
+            "titleIsRequired": "Le titre est requis",
+            "descriptionIsRequired": "La description est requise",
+            "errorWhileCreatingStory": "Erreur lors de la création de l'histoire",
+        },
+    },
+    "stories": {
+        "header": "Histoires",
+        "noStories": "Aucune histoire",
+    },
 }
