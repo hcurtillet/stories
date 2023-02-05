@@ -1,4 +1,4 @@
-import { StoryType } from '@types';
+import { StoryDetailType, StoryType } from '@types';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
@@ -25,13 +25,16 @@ export const story = {
             throw error;
         }
     },
-    get: async (id: string): Promise<StoryType> => {
+    get: async (id?: string): Promise<StoryDetailType> => {
         try {
             const response = await firestore()
                 .collection('stories')
                 .doc(id)
                 .get();
-            return response.data() as StoryType;
+            return {
+                ...response.data(),
+                id: response.id,
+            } as StoryDetailType;
         } catch (error) {
             console.log(error);
             throw error;
@@ -46,6 +49,27 @@ export const story = {
                 .update({
                     ...data,
                     userIds: [...data.userIds, uid],
+                });
+            return response;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+    getAll: async (): Promise<StoryType[]> => {
+        try {
+            const { uid } = (await auth().currentUser) || {};
+            const response = await firestore()
+                .collection('stories')
+                .where('userIds', 'array-contains', uid)
+                .get()
+                .then(querySnapshot => {
+                    return querySnapshot.docs.map(doc => {
+                        return {
+                            ...doc.data(),
+                            id: doc.id,
+                        } as StoryType;
+                    });
                 });
             return response;
         } catch (error) {

@@ -28,7 +28,8 @@ export type StoryTabParamList = {
     Story: undefined;
     Stories: undefined;
     NewPost: undefined;
-    CreateStory: undefined;
+    EditStory: { id: string } | undefined;
+    StoryDetails: { id: string };
 };
 
 export type StoryTabNavigationProp =

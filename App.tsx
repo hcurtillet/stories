@@ -7,6 +7,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import en from '@store/i18n/en.json';
 import fr from '@store/i18n/fr.json';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 i18n.use(initReactI18next).init({
     resources: {
@@ -21,13 +22,16 @@ i18n.use(initReactI18next).init({
     fallbackLng: 'en',
 });
 
+const queryClient = new QueryClient();
 const App = () => {
     return (
-        <SafeAreaProvider>
-            <Provider store={store}>
-                <StackNavigator />
-            </Provider>
-        </SafeAreaProvider>
+        <QueryClientProvider client={queryClient}>
+            <SafeAreaProvider>
+                <Provider store={store}>
+                    <StackNavigator />
+                </Provider>
+            </SafeAreaProvider>
+        </QueryClientProvider>
     );
 };
 

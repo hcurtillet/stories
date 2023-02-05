@@ -13,11 +13,11 @@ type Props = TextInputProps & {
     label: string;
 };
 export const TextInput = (props: Props) => {
-    const { label } = props;
+    const { label, multiline = false } = props;
     return (
         <View>
             <MyText>{label}</MyText>
-            <MyTextInput {...props} />
+            <MyTextInput multiline={multiline} {...props} />
         </View>
     );
 };
