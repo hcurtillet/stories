@@ -2,29 +2,46 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import { FormContainer } from '@styles';
 import { Button, ErrorModal, TextInput } from '@components';
-import { StoryTabNavigationProp, StoryType } from '@types';
+import { StoryDetailType, StoryTabNavigationProp } from '@types';
 import { useTranslation } from 'react-i18next';
 import api from '@api';
 import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native';
+import { useMutation, useQueryClient } from 'react-query';
 
-const defaultValues: StoryType = {
+const defaultValues: StoryDetailType = {
+    id: '',
     title: '',
     description: '',
     userIds: [],
+    thumbnail: '',
+    users: [],
 };
 
 type Props = {
-    initialValues?: StoryType;
+    initialValues: StoryDetailType | null;
 };
 export const StoryForm = (props: Props) => {
+    const { initialValues } = props;
     const { t } = useTranslation();
 
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const navigation = useNavigation<StoryTabNavigationProp>();
+    const queryClient = useQueryClient();
+    const mutation = useMutation(
+        initialValues ? api.story.put : api.story.post,
+        {
+            onSuccess: async () => {
+                await queryClient.invalidateQueries('stories');
+                await queryClient.invalidateQueries(
+                    `storyDetails_${initialValues?.id}`,
+                );
+                navigation.goBack();
+            },
+        },
+    );
 
-    const { initialValues } = props;
-    const handleSubmit = async (values: StoryType) => {
+    const onSubmit = async (values: StoryDetailType) => {
         if (values.title === '') {
             setErrorMessage(t('story.errorMessage.titleIsRequired'));
             return;
@@ -34,10 +51,7 @@ export const StoryForm = (props: Props) => {
             return;
         }
         try {
-            initialValues
-                ? await api.story.put(values)
-                : await api.story.post(values);
-            navigation.goBack();
+            mutation.mutate(values);
         } catch (error: any) {
             setErrorMessage(t('story.errorMessage.errorWhileCreatingStory'));
             console.log(error);
@@ -52,7 +66,7 @@ export const StoryForm = (props: Props) => {
             />
             <Formik
                 initialValues={initialValues ?? defaultValues}
-                onSubmit={handleSubmit}>
+                onSubmit={onSubmit}>
                 {({ handleChange, handleBlur, handleSubmit, values }) => (
                     <View>
                         <TextInput

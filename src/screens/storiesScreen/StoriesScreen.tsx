@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { StoryTabNavigationProp } from '@types';
-import { routes } from '@components';
+import { routes, StoriesList } from '@components';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
-import { colors } from '@styles';
+import { colors, ScreenContainer } from '@styles';
+import { useQuery } from 'react-query';
+import api from '@api';
 
 export const StoriesScreen = () => {
     const { t } = useTranslation();
     const navigation = useNavigation<StoryTabNavigationProp>();
+
+    const { data } = useQuery('stories', api.story.getAll);
 
     useEffect(() => {
         const title = t('stories.header');
@@ -26,14 +30,15 @@ export const StoriesScreen = () => {
                     name={'plus-square'}
                     size={30}
                     color={colors.blue}
-                    onPress={() => navigation.navigate(routes.createStory)}
+                    onPress={() => navigation.navigate(routes.editStory)}
                 />
             </TouchableOpacity>
         );
     };
+
     return (
-        <View>
-            <Text>Home Screen</Text>
-        </View>
+        <ScreenContainer>
+            <StoriesList stories={data ?? []} />
+        </ScreenContainer>
     );
 };
