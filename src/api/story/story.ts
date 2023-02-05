@@ -32,8 +32,8 @@ export const story = {
                 .doc(id)
                 .get();
             return {
-                id: response.id,
                 ...response.data(),
+                id: response.id,
             } as StoryDetailType;
         } catch (error) {
             console.log(error);
@@ -66,8 +66,8 @@ export const story = {
                 .then(querySnapshot => {
                     return querySnapshot.docs.map(doc => {
                         return {
-                            id: doc.id,
                             ...doc.data(),
+                            id: doc.id,
                         } as StoryType;
                     });
                 });

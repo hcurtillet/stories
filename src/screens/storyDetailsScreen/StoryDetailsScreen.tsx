@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 import api from '@api';
 import { routes, StoryDetails } from '@components';
 import Icon from 'react-native-vector-icons/Feather';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 export const StoryDetailsScreen = () => {
     const navigation = useNavigation<StoryTabNavigationProp>();
     const route = useRoute<RouteProp<StoryTabParamList, routes.storyDetails>>();
@@ -29,9 +29,14 @@ export const StoryDetailsScreen = () => {
                     size={30}
                     color={colors.blue}
                     onPress={() =>
-                        navigation.navigate(routes.editStory, {
-                            id: data?.id,
-                        })
+                        navigation.navigate(
+                            routes.editStory,
+                            data
+                                ? {
+                                      id: data.id,
+                                  }
+                                : undefined,
+                        )
                     }
                 />
             </TouchableOpacity>
@@ -40,7 +45,6 @@ export const StoryDetailsScreen = () => {
 
     return (
         <ScreenContainer>
-            <Text>Story Details Screen</Text>
             <StoryDetails story={data} />
         </ScreenContainer>
     );

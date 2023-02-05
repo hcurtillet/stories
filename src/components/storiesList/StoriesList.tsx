@@ -19,7 +19,7 @@ export const StoriesList = (props: Props) => {
                 key={id}
                 index={index}
                 onPress={() =>
-                    navigation.navigate(routes.storyDetails, { id: id })
+                    navigation.navigate(routes.storyDetails, { id })
                 }>
                 <Text>{title}</Text>
             </StoryContainer>
