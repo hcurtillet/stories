@@ -11,6 +11,7 @@ import {
     StoriesScreen,
     EditStoryScreen,
     StoryDetailsScreen,
+    StoryCreateScreen,
 } from '@screens';
 import { AppTabParamList, RootStackParamList, StoryTabParamList } from '@types';
 import Icon from 'react-native-vector-icons/Feather';
@@ -92,6 +93,10 @@ const StoryNavigator = () => {
                 name={routes.storyDetails}
                 component={StoryDetailsScreen}
             />
+            <StoryStack.Screen
+                name={routes.storyCreate}
+                component={StoryCreateScreen}
+            />
         </StoryStack.Navigator>
     );
 };
@@ -107,6 +112,7 @@ export enum routes {
     start = 'Start',
     stories = 'Stories',
     storyDetails = 'StoryDetails',
+    storyCreate = 'StoryCreate',
     addPost = 'AddPost',
     editStory = 'EditStory',
 }

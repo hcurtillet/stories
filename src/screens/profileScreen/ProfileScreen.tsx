@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { ScreenContainer } from '@styles';
-import { Button, routes } from '@components';
+import { ScreenContainer } from '@UI/screenContainer';
+import { routes } from '@components';
 import auth from '@react-native-firebase/auth';
 import { RootScreenNavigationProp } from '@types';
 import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@UI/button';
 
 export const ProfileScreen = () => {
     const navigation = useNavigation<RootScreenNavigationProp>();

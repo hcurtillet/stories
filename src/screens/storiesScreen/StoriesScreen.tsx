@@ -5,15 +5,12 @@ import { StoryTabNavigationProp } from '@types';
 import { routes, StoriesList } from '@components';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
-import { colors, ScreenContainer } from '@styles';
-import { useQuery } from 'react-query';
-import api from '@api';
+import { colors } from '@UI';
+import { ScreenContainer } from '@UI/screenContainer';
 
 export const StoriesScreen = () => {
     const { t } = useTranslation();
     const navigation = useNavigation<StoryTabNavigationProp>();
-
-    const { data } = useQuery('stories', api.story.getAll);
 
     useEffect(() => {
         const title = t('stories.header');
@@ -21,7 +18,7 @@ export const StoriesScreen = () => {
             headerRight: addStory,
             title,
         });
-    }, []);
+    }, [navigation]);
 
     const addStory = () => {
         return (
@@ -30,7 +27,7 @@ export const StoriesScreen = () => {
                     name={'plus-square'}
                     size={30}
                     color={colors.blue}
-                    onPress={() => navigation.navigate(routes.editStory)}
+                    onPress={() => navigation.navigate(routes.storyCreate)}
                 />
             </TouchableOpacity>
         );
@@ -38,7 +35,7 @@ export const StoriesScreen = () => {
 
     return (
         <ScreenContainer>
-            <StoriesList stories={data ?? []} />
+            <StoriesList />
         </ScreenContainer>
     );
 };

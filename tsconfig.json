@@ -9,10 +9,14 @@
       "@components/*": ["src/components/*"],
       "@screens/*": ["src/screens/*"],
       "@store/*": ["src/store/*"],
-      "@styles/*": ["src/styles/*"],
+      "@UI/*": ["src/UI/*"],
       "@utils/*": ["src/utils/*"],
       "@types/*": ["src/types/*"],
-    }
+      "@env": [".env"]
+    },
+    "types": [
+      "@types/styled-components-react-native"
+    ]
   },
 }
 

@@ -3,11 +3,12 @@ import type { RootState } from '../store';
 import { UserType } from '@types';
 
 const initialState: UserType = {
-    uid: '',
+    pseudo: '',
+    id: '',
     email: '',
-    name: '',
-    dateOfBirth: '',
-    refreshToken: '',
+    firstName: '',
+    lastName: '',
+    profilePicture: '',
 };
 
 export const userSlice = createSlice({
@@ -15,14 +16,11 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<UserType>) => {
-            state.uid = action.payload.uid;
-            state.name = action.payload.name;
-            state.email = action.payload.email;
-            state.dateOfBirth = action.payload.dateOfBirth;
+            state = action.payload;
         },
     },
 });
 
-export const selectMode = (state: RootState) => state.user;
+export const selectUser = (state: RootState) => state.user;
 
 export default userSlice.reducer;

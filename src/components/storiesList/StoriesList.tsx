@@ -2,16 +2,14 @@ import React from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { StoryTabNavigationProp, StoryType } from '@types';
 import styled from 'styled-components';
-import { colors } from '@styles';
+import { colors } from '@UI';
 import { useNavigation } from '@react-navigation/native';
 import { routes } from '@components';
+import { useStoriesQuery } from '@api/story';
 
-type Props = {
-    stories: StoryType[];
-};
-export const StoriesList = (props: Props) => {
-    const { stories } = props;
+export const StoriesList = () => {
     const navigation = useNavigation<StoryTabNavigationProp>();
+    const { data: stories } = useStoriesQuery();
     const renderStory = (story: StoryType, index: number) => {
         const { id, title } = story;
         return (

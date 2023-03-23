@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
-import { FormContainer } from '@styles';
-import { TextInput, Button, routes, ErrorMessage } from '@components';
 import { useNavigation } from '@react-navigation/native';
 import { RootScreenNavigationProp } from '@types';
 import { View } from 'react-native';
 import styled from 'styled-components';
-import api from '@api';
 import { useTranslation } from 'react-i18next';
+import { routes } from '@components';
+import { login } from '@api/authentication';
+import { FormContainer } from '@UI/formContainer';
+import { TextInput } from '@UI/textInput';
+import { Button } from '@UI/button';
+import { ErrorMessage } from '@UI/errorMessage';
 
 export const LoginForm = () => {
     const navigation = useNavigation<RootScreenNavigationProp>();
@@ -18,7 +21,8 @@ export const LoginForm = () => {
         try {
             const { email, password } = values;
 
-            const result = await api.authentication.login(email, password);
+            const result = await login(email, password);
+
             if (result) {
                 navigation.navigate(routes.app);
             }
