@@ -15,7 +15,6 @@ export const getStory = async (id: string): Promise<StoryType> => {
 export const getStories = async (): Promise<StoryType[]> => {
     try {
         const { data } = await client.get<StoryDto[]>(`/stories`);
-        console.log('data', data);
         if (!data) {
             return [];
         }
@@ -29,7 +28,6 @@ export const postStory =
     () =>
     async (item: StoryType): Promise<StoryType> => {
         try {
-            console.log('item', item);
             const { data } = await client.post<StoryDto>(`/stories`, item);
             return formatToStory(data);
         } catch (error) {
