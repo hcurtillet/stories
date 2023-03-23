@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, Modal } from 'react-native';
-import { Button } from '@components';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
+import { Button } from '@UI/button';
 
 type Props = {
     visible: boolean;

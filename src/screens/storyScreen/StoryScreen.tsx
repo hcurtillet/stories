@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { colors, ScreenContainer } from '@styles';
+import { colors } from '@UI';
+import { ScreenContainer } from '@UI/screenContainer';
 import { useTranslation } from 'react-i18next';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';

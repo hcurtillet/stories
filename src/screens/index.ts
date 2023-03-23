@@ -6,3 +6,4 @@ export * from './startScreen';
 export * from './storiesScreen';
 export * from './storyScreen';
 export * from './storyDetailsScreen';
+export * from './storyCreateScreen';

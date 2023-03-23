@@ -1,13 +1,16 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { Button, ErrorMessage, routes, TextInput } from '@components';
-import { FormContainer } from '@styles';
+import { routes } from '@components';
 import { RootScreenNavigationProp } from '@types';
 import styled from 'styled-components';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import { useTranslation } from 'react-i18next';
+import { FormContainer } from '@UI/formContainer';
+import { TextInput } from '@UI/textInput';
+import { Button } from '@UI/button';
+import { ErrorMessage } from '@UI/errorMessage';
 
 export const SignUpForm = () => {
     const navigation = useNavigation<RootScreenNavigationProp>();

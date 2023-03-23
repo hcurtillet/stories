@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { ScreenContainer } from '@styles';
+import { ScreenContainer } from '@UI/screenContainer';
 import { SignUpForm } from '@components';
 import { useTranslation } from 'react-i18next';
 
