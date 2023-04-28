@@ -23,6 +23,20 @@
         "no": "No",
         "areYouSure": "Are you sure?",
     },
+    "profile": {
+        "header": "My profile",
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "errorMessage": {
+            "nameIsRequired": "Name is required",
+            "emailIsRequired": "Email is required",
+            "passwordIsRequired": "Password is required",
+            "passwordDoesNotMatch": "Password does not match",
+            "errorWhileUpdatingProfile": "Error while updating profile",
+        },
+    },
     "story": {
         "header": "Story",
         "newStory": "New Story",

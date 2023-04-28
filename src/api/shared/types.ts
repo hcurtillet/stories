@@ -25,7 +25,7 @@ export enum MediaTypeDto {
 export interface PostDto extends BaseDto {
     storyId: string;
     content: string;
-    medias: MediaDto[];
+    medias: string[];
     comments: CommentDto[];
     author: UserDto;
     createdAt: string;
@@ -35,14 +35,15 @@ export interface StoryDto extends BaseDto {
     title: string;
     numberOfPosts: number;
     description: string;
-    thumbnail: MediaDto;
+    thumbnails?: string[];
     userIds: string[];
+    users?: UserDto[];
 }
 
 export interface UserDto extends BaseDto {
     firstName: string;
     lastName: string;
     email: string;
-    profilePicture: MediaDto;
+    profilePicture: string | null;
     storyIds: string[];
 }

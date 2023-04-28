@@ -1,4 +1,4 @@
-import { getStories, getStory, postStory, putStory } from '@api/story';
+import { getStories, getStory, postStory, putStory } from './queries';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 export const useStoriesQuery = () => {
@@ -17,7 +17,7 @@ export const useStoryQuery = (id: string) => {
 
 export const useStoryCreateMutation = (handleOnSuccess?: () => void) => {
     const queryClient = useQueryClient();
-    const mutationKey = ['story-create'];
+    const mutationKey = ['storyFeed-create'];
     const mutationFn = postStory();
     const options = {
         onSuccess: () => {
