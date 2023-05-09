@@ -1,6 +1,6 @@
-import { UserType } from '@types';
+import { UserInterface } from '@types';
 
-export const userMock: UserType = {
+export const userMock: UserInterface = {
     id: '1',
     firstName: 'Hugo',
     lastName: 'Curtillet',

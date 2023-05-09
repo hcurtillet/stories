@@ -9,7 +9,7 @@
         "passwordDoesNotMatch": "Password does not match",
         "emailAlreadyExists": "Email already exists",
         "userNotFound": "User not found",
-        "invalidPassword": "Invalid password",
+        "invalidPassword": "Invalid password"
     },
     "common": {
         "ok": "Ok",
@@ -21,11 +21,14 @@
         "add": "Add",
         "yes": "Yes",
         "no": "No",
-        "areYouSure": "Are you sure?",
+        "areYouSure": "Are you sure?"
     },
     "profile": {
         "header": "My profile",
         "name": "Name",
+        "username": "Username",
+        "firstName": "First name",
+        "lastName": "Last name",
         "email": "Email",
         "password": "Password",
         "confirmPassword": "Confirm Password",
@@ -34,8 +37,14 @@
             "emailIsRequired": "Email is required",
             "passwordIsRequired": "Password is required",
             "passwordDoesNotMatch": "Password does not match",
-            "errorWhileUpdatingProfile": "Error while updating profile",
+            "errorWhileUpdatingProfile": "Error while updating profile"
         },
+        "editProfile": "Edit profile",
+        "saveProfile": "Save profile",
+        "takePicture": "Take picture",
+        "chooseFromLibrary": "Choose from library",
+        "errorUpdatingProfile": "Error while updating profile",
+        "successUpdatingProfile": "Profile updated successfully"
     },
     "story": {
         "header": "Story",
@@ -45,12 +54,35 @@
         "errorMessage": {
             "titleIsRequired": "Title is required",
             "descriptionIsRequired": "Description is required",
-            "errorWhileCreatingStory": "Error while creating story",
-        },
+            "errorWhileCreatingStory": "Error while creating story"
+        }
+    },
+    "storyMembers": {
+        "header": "Story members",
+        "addMembers": "Add members",
+        "searchMembers": "Search members",
+        "add": "Add",
+        "remove": "Remove",
+        "search": "Search",
+        "noUsersFound": "No users found",
+        "errorMessage": {
+            "errorWhileAddingMembers": "Error while adding members"
+        }
+    },
+    "newPost": {
+        "header": "New post",
+        "placeholder": "Tell something..."
     },
     "stories": {
         "header": "Stories",
-        "noStories": "No stories",
+        "noStories": "No stories"
     },
-
+    "date": {
+        "year": "{{count}} y.",
+        "month": "{{count}} m.",
+        "day": "{{count}} d.",
+        "hour": "{{count}} h.",
+        "minute": "{{count}} min.",
+        "now": "now"
+    }
 }

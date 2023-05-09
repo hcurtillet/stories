@@ -3,6 +3,7 @@ import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components/native';
 import { ImageZoomModal } from './ImageZoomModal';
 import { Image } from '@UI/image';
+import { colors } from '@UI';
 
 interface ComponentProps {
     images: string[];
@@ -20,9 +21,10 @@ export const ImageCarousel: FC<ComponentProps> = ({ images }) => {
                     alignSelf: 'center',
                     width: '100%',
                     height: '100%',
-                    borderRadius: 25,
+                    borderRadius: 10,
                 }}
                 uri={item}
+                resizeMode="cover"
             />
         </ImageContainer>
     );
@@ -68,5 +70,7 @@ const Container = styled.View({
 const ImageContainer = styled.TouchableOpacity({
     flex: 1,
     width: '100%',
+    backgroundColor: colors.lightGrey,
+    borderRadius: 25,
     aspectRatio: 1,
 });

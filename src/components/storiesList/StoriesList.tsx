@@ -4,23 +4,30 @@ import { StoryInterface } from '@types';
 import styled from 'styled-components';
 import { StoryItem } from '@components/storiesList/StoryItem';
 import { useStoriesQuery } from '@api/story';
+import { Loader } from '@UI/loader';
 
 export const StoriesList = () => {
-    const { data: stories } = useStoriesQuery();
-    // const stories = storiesMock;
+    const { data: stories, isFetching } = useStoriesQuery();
     const renderStory = ({ item }: { item: StoryInterface }) => (
         <StoryItem {...item} />
     );
 
     return (
         <Container>
-            <FlatList
-                style={{ width: '100%' }}
-                data={stories}
-                numColumns={2}
-                columnWrapperStyle={{ flex: 1, justifyContent: 'flex-start' }}
-                renderItem={renderStory}
-            />
+            {isFetching ? (
+                <Loader />
+            ) : (
+                <FlatList
+                    style={{ width: '100%' }}
+                    data={stories}
+                    numColumns={2}
+                    columnWrapperStyle={{
+                        flex: 1,
+                        justifyContent: 'flex-start',
+                    }}
+                    renderItem={renderStory}
+                />
+            )}
         </Container>
     );
 };

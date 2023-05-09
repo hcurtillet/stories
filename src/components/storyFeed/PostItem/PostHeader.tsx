@@ -3,29 +3,33 @@ import { PostInterface } from '@types';
 import styled from 'styled-components/native';
 import { BaseText } from '@UI';
 import { Image } from '@UI/image';
+import { useDateFormat } from '@components/shared';
 
 export const PostHeader: FC<Pick<PostInterface, 'author' | 'createdAt'>> = ({
-    author: { firstName, lastName, profilePicture },
+    author,
     createdAt,
-}) => (
-    <Container>
-        <UserContainer>
-            <Image
-                uri={profilePicture}
-                style={{
-                    width: 50,
-                    height: 50,
-                    borderRadius: 25,
-                }}
-            />
-            <UserInfos>
-                <BaseText>{firstName}</BaseText>
-                <BaseText>{lastName}</BaseText>
-            </UserInfos>
-        </UserContainer>
-        <BaseText>{createdAt}</BaseText>
-    </Container>
-);
+}) => {
+    const { firstName, lastName, profilePicture } = author || {};
+    return (
+        <Container>
+            <UserContainer>
+                <Image
+                    uri={profilePicture}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 25,
+                    }}
+                />
+                <UserInfos>
+                    <BaseText>{firstName}</BaseText>
+                    <BaseText>{lastName}</BaseText>
+                </UserInfos>
+            </UserContainer>
+            <BaseText>{useDateFormat(createdAt)}</BaseText>
+        </Container>
+    );
+};
 
 const Container = styled.View({
     width: '100%',

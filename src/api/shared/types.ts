@@ -38,11 +38,14 @@ export interface StoryDto extends BaseDto {
     thumbnails?: string[];
     userIds: string[];
     users?: UserDto[];
+    createdAt: string;
+    createdBy: string;
 }
 
 export interface UserDto extends BaseDto {
     firstName: string;
     lastName: string;
+    username: string;
     email: string;
     profilePicture: string | null;
     storyIds: string[];

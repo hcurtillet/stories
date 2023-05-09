@@ -1,6 +1,6 @@
 import auth from '@react-native-firebase/auth';
 import { client } from '@api/client';
-import { UserType } from '@types';
+import { UserInterface } from '@types';
 import { UserDto } from '@api/shared';
 import { formatToUser } from '@api/shared/helpers';
 
@@ -43,7 +43,7 @@ export const signUp = async (email: string, password: string) => {
     }
 };
 
-export const getUserInfo = async (): Promise<UserType> => {
+export const getUserInfo = async (): Promise<UserInterface> => {
     try {
         const { data } = await client.get<UserDto>('users/me');
         return formatToUser(data);
@@ -52,9 +52,14 @@ export const getUserInfo = async (): Promise<UserType> => {
     }
 };
 
-export const updateUserInfo = async (entity: UserType): Promise<UserType> => {
+export const updateUserInfo = async (
+    entity: UserInterface,
+): Promise<UserInterface> => {
     try {
-        const { data } = await client.put<UserDto>('users/me', entity);
+        const { data } = await client.put<UserDto>(
+            `users/${entity.id}`,
+            entity,
+        );
         return formatToUser(data);
     } catch (error) {
         throw error;

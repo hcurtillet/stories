@@ -70,5 +70,11 @@
       <string>Zocial.ttf</string>
       <string>Fontisto.ttf</string>
     </array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like access to your photo gallery (For Upload your photo)</string>
+    <key>NSCameraUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like to use your camera (For upload your photo)</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like to use your microphone (For upload your video)</string>
 </dict>
 </plist>

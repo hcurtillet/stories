@@ -1,17 +1,18 @@
-import { UserType } from './UserType';
+import { UserInterface } from './UserInterface';
 
 export interface PostInterface {
-    id: string;
+    id?: string;
     content: string;
+    storyId: string;
     medias: string[];
     comments: CommentInterface[];
-    author: UserType;
-    createdAt: string;
+    author?: UserInterface;
+    createdAt?: string;
 }
 
 export interface CommentInterface {
-    id: string;
+    id?: string;
     content: string;
-    author: UserType;
-    createdAt: string;
+    author?: UserInterface;
+    createdAt?: string;
 }

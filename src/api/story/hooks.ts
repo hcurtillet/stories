@@ -1,5 +1,6 @@
 import { getStories, getStory, postStory, putStory } from './queries';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { StoryInterface } from '@types';
 
 export const useStoriesQuery = () => {
     const queryKey = ['stories'];
@@ -15,14 +16,18 @@ export const useStoryQuery = (id: string) => {
     return useQuery(queryKey, queryFn, options);
 };
 
-export const useStoryCreateMutation = (handleOnSuccess?: () => void) => {
+export const useStoryCreateMutation = (
+    handleOnSuccess?: (storyId: string) => void,
+) => {
     const queryClient = useQueryClient();
     const mutationKey = ['storyFeed-create'];
-    const mutationFn = postStory();
+    const mutationFn = postStory;
     const options = {
-        onSuccess: () => {
+        onSuccess: (story: StoryInterface | null) => {
             queryClient.invalidateQueries(['stories']);
-            handleOnSuccess && handleOnSuccess();
+            if (story) {
+                handleOnSuccess && handleOnSuccess(story.id);
+            }
         },
     };
     return useMutation(mutationKey, mutationFn, options);

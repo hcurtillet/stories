@@ -11,7 +11,10 @@ import {
     StoriesScreen,
     EditStoryScreen,
     StoryDetailsScreen,
-    StoryCreateScreen,
+    NewPostScreen,
+    EditProfileScreen,
+    NewStoryScreen,
+    AddStoryMembersScreen,
 } from '@screens';
 import {
     AppTabParamList,
@@ -82,10 +85,12 @@ const StoryNavigator = () => (
             name={routes.storyDetails}
             component={StoryDetailsScreen}
         />
+        <StoryStack.Screen name={routes.newStory} component={NewStoryScreen} />
         <StoryStack.Screen
-            name={routes.storyCreate}
-            component={StoryCreateScreen}
+            name={routes.addStoryMembers}
+            component={AddStoryMembersScreen}
         />
+        <StoryStack.Screen name={routes.newPost} component={NewPostScreen} />
     </StoryStack.Navigator>
 );
 
@@ -95,7 +100,7 @@ const ProfileNavigator = () => (
         <ProfileStack.Screen name={routes.profile} component={ProfileScreen} />
         <ProfileStack.Screen
             name={routes.editProfile}
-            component={ProfileScreen}
+            component={EditProfileScreen}
         />
     </ProfileStack.Navigator>
 );
@@ -111,8 +116,10 @@ export enum routes {
     start = 'Start',
     stories = 'Stories',
     storyDetails = 'StoryDetails',
-    storyCreate = 'StoryCreate',
     addPost = 'AddPost',
     editStory = 'EditStory',
     editProfile = 'EditProfile',
+    newPost = 'NewPost',
+    newStory = 'NewStory',
+    addStoryMembers = 'AddStoryMembers',
 }

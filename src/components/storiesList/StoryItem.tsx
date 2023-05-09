@@ -4,12 +4,17 @@ import styled from 'styled-components/native';
 import { BaseText } from '@UI';
 import { Images } from '@components/storiesList/Images';
 import { useNavigation } from '@react-navigation/native';
+import { routes } from '@components';
+import { useAppDispatch } from '@store';
+import { setCurrentStoryId } from '@store/storySlice';
 
 export const StoryItem: FC<StoryInterface> = ({ id, title, thumbnails }) => {
     const navigation = useNavigation<StoryTabNavigationProp>();
+    const dispatch = useAppDispatch();
 
     const handlePress = () => {
-        navigation.navigate('Story', { id });
+        dispatch(setCurrentStoryId(id));
+        navigation.navigate(routes.story, { id });
     };
 
     return (

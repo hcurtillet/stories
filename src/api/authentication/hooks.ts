@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from 'react-query';
-import { UserType } from '@types';
 import { getUserInfo, login, updateUserInfo } from '@api/authentication';
 
 export const useUserInfoQuery = () => {
@@ -11,8 +10,8 @@ export const useUserInfoQuery = () => {
     return useQuery(queryKey, queryFn, options);
 };
 
-export const useUserInfoMutation = (user: UserType) => {
-    const mutationFn = () => updateUserInfo(user);
+export const useUserInfoMutation = () => {
+    const mutationFn = updateUserInfo;
     const mutationKey = ['me'];
     const options = {
         retry: false,

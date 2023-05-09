@@ -1,12 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './userSlice/userSlice';
 import storyReducer from './storySlice/storySlice';
+import postReducer from './postSlice/postSlice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import searchUserSlice from './userSlice/searchUserSlice';
 
 export const store = configureStore({
     reducer: {
         user: userReducer,
+        post: postReducer,
         story: storyReducer,
+        searchUser: searchUserSlice,
     },
 });
 

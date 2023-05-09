@@ -5,12 +5,11 @@ import React, { FC, useCallback, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { colors } from '@UI';
-import { useStoriesQuery } from '@api/story';
+import { routes } from '@components/stackNavigator';
 
 export const Header: FC = () => {
     const { t } = useTranslation();
     const navigation = useNavigation<StoryTabNavigationProp>();
-    const { refetch } = useStoriesQuery();
 
     const addStory = useCallback(
         () => (
@@ -19,8 +18,7 @@ export const Header: FC = () => {
                     name={'plus-square'}
                     size={30}
                     color={colors.blue}
-                    // onPress={() => navigation.navigate(routes.storyCreate)}
-                    onPress={() => refetch()}
+                    onPress={() => navigation.navigate(routes.newStory)}
                 />
             </TouchableOpacity>
         ),

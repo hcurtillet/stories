@@ -14,7 +14,7 @@ export const getStory = async (id: string): Promise<StoryInterface> => {
 
 export const getStories = async (): Promise<StoryInterface[]> => {
     try {
-        const { data } = await client.get<StoryDto[]>(`/stories`);
+        const { data } = await client.get<StoryDto[]>(`/stories/myStories`);
         if (!data) {
             return [];
         }
@@ -24,16 +24,16 @@ export const getStories = async (): Promise<StoryInterface[]> => {
     }
 };
 
-export const postStory =
-    () =>
-    async (item: StoryInterface): Promise<StoryInterface> => {
-        try {
-            const { data } = await client.post<StoryDto>(`/stories`, item);
-            return formatToStory(data);
-        } catch (error) {
-            throw error;
-        }
-    };
+export const postStory = async (
+    item: StoryInterface,
+): Promise<StoryInterface> => {
+    try {
+        const { data } = await client.post<StoryDto>(`/stories`, item);
+        return formatToStory(data);
+    } catch (error) {
+        throw error;
+    }
+};
 
 export const putStory = (id: string) => async (item: StoryInterface) => {
     try {

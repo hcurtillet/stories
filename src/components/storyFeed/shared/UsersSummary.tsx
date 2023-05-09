@@ -1,9 +1,9 @@
-import { UserType } from '@types';
+import { UserInterface } from '@types';
 import { FlatList, Text, View } from 'react-native';
 import styled from 'styled-components/native';
 
 interface ComponentProps {
-    users: UserType[];
+    users: UserInterface[];
 }
 
 const ItemContainer = styled(View)({
@@ -17,7 +17,7 @@ export const UsersSummary = ({ users }: ComponentProps) => {
     const renderItem = ({
         item: { firstName, lastName },
     }: {
-        item: UserType;
+        item: UserInterface;
     }) => (
         <ItemContainer>
             <Text>

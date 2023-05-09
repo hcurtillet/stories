@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
     Text,
     TextInput as ReactTextInput,
     TextInputProps,
-    View,
 } from 'react-native';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 import { colors } from '@UI';
 
-type Props = TextInputProps & {
-    label: string;
-};
-export const TextInput = (props: Props) => {
-    const { label, multiline = false } = props;
-    return (
-        <View>
-            <MyText>{label}</MyText>
-            <MyTextInput multiline={multiline} {...props} />
-        </View>
-    );
-};
+interface ComponentProps extends TextInputProps {
+    label?: string;
+    flex?: boolean;
+}
+export const TextInput: FC<ComponentProps> = ({
+    label,
+    flex = false,
+    multiline = false,
+    ...props
+}) => (
+    <Container flexed={flex}>
+        {label && <MyText>{label}</MyText>}
+        <MyTextInput multiline={multiline} {...props} />
+    </Container>
+);
+
+const Container = styled.View<{ flexed: boolean }>(({ flexed }) => ({
+    ...(flexed && { flex: 1 }),
+}));
 
 const MyText = styled(Text)`
     color: ${colors.blue};
@@ -31,6 +37,6 @@ const MyTextInput = styled(ReactTextInput)<{ multiline: boolean }>`
     padding: 10px;
     width: 100%;
     height: ${props => (props.multiline ? '100px' : '40px')};
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-top: 5px;
 `;
