@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import { UserType } from '@types';
+import { UserInterface } from '@types';
 
-const initialState: UserType = {
-    pseudo: '',
+const initialState: UserInterface = {
+    username: '',
     id: '',
     email: '',
     firstName: '',
@@ -15,12 +15,14 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<UserType>) => {
+        setUser: (state, action: PayloadAction<UserInterface>) => {
             state = action.payload;
         },
     },
 });
 
 export const selectUser = (state: RootState) => state.user;
+
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;

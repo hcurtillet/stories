@@ -1,28 +1,35 @@
-import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import styled from 'styled-components';
+import React, { FC } from 'react';
+import { Text } from 'react-native';
 import { colors } from '@UI';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import { HorizontalSpace } from '@UI/space';
+import styled from 'styled-components/native';
 
-type Props = {
+interface ComponentProps {
     onPress: () => void;
     title: string;
-};
-export const Button = (props: Props) => {
-    const { onPress, title } = props;
-    return (
-        <MyButton onPress={onPress}>
-            <Text>{title}</Text>
-        </MyButton>
-    );
-};
+    icon?: string;
+}
+export const Button: FC<ComponentProps> = ({ onPress, icon, title }) => (
+    <MyButton onPress={onPress}>
+        <Text>{title}</Text>
+        {icon && (
+            <>
+                <HorizontalSpace size={10} />
+                <Icon name={icon} size={20} color={colors.black} />
+            </>
+        )}
+    </MyButton>
+);
 
-const MyButton = styled(TouchableOpacity)`
-    background-color: ${colors.blue};
-    min-width: 100px;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
-    align-self: center;
-    align-items: center;
-    justify-content: center;
-`;
+const MyButton = styled.TouchableOpacity({
+    backgroundColor: colors.blue,
+    minWidth: 100,
+    borderRadius: 10,
+    padding: 10,
+    margin: 10,
+    flexDirection: 'row',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+});

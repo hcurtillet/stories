@@ -1,3 +1,4 @@
-export * from './navigationType';
-export * from './userType';
-export * from './storyType';
+export * from './NavigationInterface';
+export * from './UserInterface';
+export * from './StoryInterface';
+export * from './PostInterface';

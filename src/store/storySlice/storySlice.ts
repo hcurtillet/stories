@@ -19,6 +19,8 @@ export const storySlice = createSlice({
     },
 });
 
+export const { setCurrentStoryId } = storySlice.actions;
+
 export const selectStory = (state: RootState) => state.story;
 
 export default storySlice.reducer;

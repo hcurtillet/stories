@@ -1,9 +1,9 @@
 import { client } from '@api/client';
-import { StoryType } from '@types';
+import { StoryInterface } from '@types';
 import { StoryDto } from '@api/shared';
 import { formatToStory } from '@api/shared/helpers';
 
-export const getStory = async (id: string): Promise<StoryType> => {
+export const getStory = (id: string) => async (): Promise<StoryInterface> => {
     try {
         const { data } = await client.get<StoryDto>(`/stories/${id}`);
         return formatToStory(data);
@@ -12,9 +12,9 @@ export const getStory = async (id: string): Promise<StoryType> => {
     }
 };
 
-export const getStories = async (): Promise<StoryType[]> => {
+export const getStories = async (): Promise<StoryInterface[]> => {
     try {
-        const { data } = await client.get<StoryDto[]>(`/stories`);
+        const { data } = await client.get<StoryDto[]>(`/stories/myStories`);
         if (!data) {
             return [];
         }
@@ -24,18 +24,18 @@ export const getStories = async (): Promise<StoryType[]> => {
     }
 };
 
-export const postStory =
-    () =>
-    async (item: StoryType): Promise<StoryType> => {
-        try {
-            const { data } = await client.post<StoryDto>(`/stories`, item);
-            return formatToStory(data);
-        } catch (error) {
-            throw error;
-        }
-    };
+export const postStory = async (
+    item: StoryInterface,
+): Promise<StoryInterface> => {
+    try {
+        const { data } = await client.post<StoryDto>(`/stories`, item);
+        return formatToStory(data);
+    } catch (error) {
+        throw error;
+    }
+};
 
-export const putStory = (id: string) => async (item: StoryType) => {
+export const putStory = (id: string) => async (item: StoryInterface) => {
     try {
         const { data } = await client.put<StoryDto>(`/stories/${id}`, item);
         return formatToStory(data);
@@ -44,7 +44,7 @@ export const putStory = (id: string) => async (item: StoryType) => {
     }
 };
 
-export const deleteStory = async (id: string) => {
+export const deleteStory = (id: string) => async () => {
     try {
         return await client.delete(`/stories/${id}`);
     } catch (error) {

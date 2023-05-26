@@ -9,7 +9,7 @@
         "passwordDoesNotMatch": "Password does not match",
         "emailAlreadyExists": "Email already exists",
         "userNotFound": "User not found",
-        "invalidPassword": "Invalid password",
+        "invalidPassword": "Invalid password"
     },
     "common": {
         "ok": "Ok",
@@ -22,21 +22,98 @@
         "yes": "Yes",
         "no": "No",
         "areYouSure": "Are you sure?",
+        "takePicture": "Take picture",
+        "chooseFromLibrary": "Choose from library"
+    },
+    "profile": {
+        "header": "My profile",
+        "name": "Name",
+        "username": "Username",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "errorMessage": {
+            "nameIsRequired": "Name is required",
+            "emailIsRequired": "Email is required",
+            "passwordIsRequired": "Password is required",
+            "passwordDoesNotMatch": "Password does not match",
+            "errorWhileUpdatingProfile": "Error while updating profile"
+        },
+        "editProfile": "Edit profile",
+        "saveProfile": "Save profile",
+        "errorUpdatingProfile": "Error while updating profile",
+        "successUpdatingProfile": "Profile updated successfully"
     },
     "story": {
         "header": "Story",
         "newStory": "New Story",
+        "editStory": "Edit Story",
         "title": "Title",
         "description": "Description",
         "errorMessage": {
             "titleIsRequired": "Title is required",
             "descriptionIsRequired": "Description is required",
-            "errorWhileCreatingStory": "Error while creating story",
+            "errorWhileCreatingStory": "Error while creating story"
         },
+        "noPosts": "No posts",
+    },
+    "storyMembers": {
+        "header": "Story members",
+        "addMembers": "Add members",
+        "searchMembers": "Search members",
+        "add": "Add",
+        "remove": "Remove",
+        "search": "Search",
+        "noUsersFound": "No users found",
+        "errorMessage": {
+            "errorWhileAddingMembers": "Error while adding members"
+        }
+    },
+    "newPost": {
+        "header": "New post",
+        "placeholder": "Tell something..."
+    },
+    "postDetails": {
+        "header": "Post details",
+        "editPost": "Edit post",
+        "deletePost": "Delete post",
+        "writeComment": "Write a comment...",
+        "errorMessage": {
+            "errorWhileDeletingPost": "Error while deleting post"
+        }
     },
     "stories": {
         "header": "Stories",
-        "noStories": "No stories",
+        "noStories": "No stories"
     },
-
+    "date": {
+        "year": {
+            "abbreviated": "{{count}} y.",
+            "singular": "A year ago",
+            "plural": "{{count}} years ago"
+        },
+        "month": {
+            "abbreviated": "{{count}} m.",
+            "singular": "A month ago",
+            "plural": "{{count}} months ago"
+        },
+        "day": {
+            "abbreviated": "{{count}} d.",
+            "singular": "A day ago",
+            "plural": "{{count}} days ago"
+        },
+        "hour": {
+            "abbreviated": "{{count}} h.",
+            "singular": "An hour ago",
+            "plural": "{{count}} hours ago"
+        },
+        "minute": {
+            "abbreviated": "{{count}} min.",
+            "singular": "A minute ago",
+            "plural": "{{count}} minutes ago"
+        },
+        "now": "now"
+    }
 }

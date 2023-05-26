@@ -1,36 +1,42 @@
-import React from 'react';
-import {
-    Text,
-    TextInput as ReactTextInput,
-    TextInputProps,
-    View,
-} from 'react-native';
-import styled from 'styled-components';
+import React, { FC } from 'react';
+import { Text, TextInputProps } from 'react-native';
+import styled from 'styled-components/native';
 
 import { colors } from '@UI';
 
-type Props = TextInputProps & {
-    label: string;
-};
-export const TextInput = (props: Props) => {
-    const { label, multiline = false } = props;
-    return (
-        <View>
-            <MyText>{label}</MyText>
-            <MyTextInput multiline={multiline} {...props} />
-        </View>
-    );
-};
+interface ComponentProps extends TextInputProps {
+    label?: string | undefined;
+    flex?: boolean;
+}
+export const TextInput: FC<ComponentProps> = ({
+    label,
+    flex = false,
+    multiline = false,
+    ...props
+}) => (
+    <Container flexed={flex}>
+        {label && <MyText>{label}</MyText>}
+        <MyTextInput multiline={multiline} {...props} />
+    </Container>
+);
+
+const Container = styled.View<{ flexed: boolean }>(({ flexed }) => ({
+    ...(flexed && { flex: 1 }),
+}));
 
 const MyText = styled(Text)`
     color: ${colors.blue};
 `;
-const MyTextInput = styled(ReactTextInput)<{ multiline: boolean }>`
-    border: 1px solid ${colors.blue};
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    height: ${props => (props.multiline ? '100px' : '40px')};
-    margin-bottom: 10px;
-    margin-top: 5px;
-`;
+const MyTextInput = styled.TextInput<{ multiline: boolean }>(
+    ({ multiline }) => ({
+        borderRadius: 5,
+        padding: 10,
+        color: colors.black,
+        width: '100%',
+        height: multiline ? 100 : 40,
+        marginBottom: 5,
+        marginTop: 5,
+        backgroundColor: colors.lightBlue,
+        placeholderTextColor: colors.blue,
+    }),
+);
