@@ -5,10 +5,10 @@ import { StoryTabParamList } from '@types';
 import { routes } from '@components';
 import { usePostQuery } from '@api/posts';
 import { Loader } from '@UI/loader';
-import { Comments, CommentInput } from './Comments';
+import { Comments, CommentInput } from './comments';
 import { ImageCarousel } from '@components/shared';
 import { Content } from './Content';
-import { PostHeader } from './PostHeader';
+import { PostHeader } from './postHeader';
 
 export const PostDetails: FC = () => {
     const route = useRoute<RouteProp<StoryTabParamList, routes.postDetails>>();
@@ -16,12 +16,8 @@ export const PostDetails: FC = () => {
 
     const { data: post, isFetching } = usePostQuery(id);
 
-    const { comments, content, createdAt, medias, author } = post || {
-        comments: [],
-        content: '',
-        createdAt: '',
-        medias: [],
-    };
+    const { comments, content, createdAt, medias, author, storyId } =
+        post || {};
     return (
         <Container>
             {isFetching && <Loader />}
@@ -29,12 +25,22 @@ export const PostDetails: FC = () => {
                 <>
                     <ScrollContainer
                         contentContainerStyle={{ alignItems: 'center' }}>
-                        <PostHeader author={author} createdAt={createdAt} />
-                        <ImageContainer>
-                            <ImageCarousel images={medias} isPreview={false} />
-                        </ImageContainer>
-                        <Content content={content} />
-                        <Comments comments={comments} />
+                        <PostHeader
+                            author={author}
+                            createdAt={createdAt}
+                            storyId={storyId as string}
+                            id={id || ''}
+                        />
+                        {medias && medias.length > 0 && (
+                            <ImageContainer>
+                                <ImageCarousel
+                                    images={medias}
+                                    isPreview={false}
+                                />
+                            </ImageContainer>
+                        )}
+                        {content && <Content content={content} />}
+                        {comments && <Comments comments={comments} />}
                     </ScrollContainer>
                     <CommentInput postId={id} />
                 </>

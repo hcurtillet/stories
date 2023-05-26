@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { PostInterface, StoryTabNavigationProp } from '@types';
 import styled from 'styled-components/native';
-import { PostInfo } from '@components/storyFeed/postItem/PostInfo';
+import { PostHeader } from './PostHeader';
 import { PostFooter } from '@components/storyFeed/postItem/PostFooter';
 import { ImageCarousel } from '@components/shared';
 import { PostContent } from '@components/storyFeed/postItem/PostContent';
@@ -30,7 +30,7 @@ export const PostItem: FC<PostInterface> = ({
         <>
             <Container>
                 <InfoContainer onPress={onPress}>
-                    <PostInfo author={author} createdAt={createdAt} />
+                    <PostHeader author={author} createdAt={createdAt} />
                     <VerticalSpace size={10} />
                     <ImageCarousel images={medias} isPreview={true} />
                     <VerticalSpace size={5} />

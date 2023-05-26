@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
-import { UserInterface } from '@types';
+import { StoryTabParamList, UserInterface } from '@types';
 import { Image } from '@UI/image';
 import { BaseText, colors } from '@UI';
 import { Separator } from '@UI/separators';
-import { ActionButton } from '@components/addStoryMembers/userItem/ActionButton';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { routes } from '@components';
+import { useStoryQuery, useStoryUpdateMutation } from '@api/story';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export const UserItem: FC<UserInterface> = ({
     id,
@@ -12,30 +15,54 @@ export const UserItem: FC<UserInterface> = ({
     lastName,
     username,
     profilePicture,
-}) => (
-    <>
-        <Container>
-            <UserProfilePictureContainer>
-                <Image
-                    uri={profilePicture}
-                    style={{ height: '100%', width: '100%' }}
-                />
-            </UserProfilePictureContainer>
-            <UserInfoContainer>
-                <BaseText>{username}</BaseText>
-                <BaseText>{`${firstName} ${lastName}`}</BaseText>
-            </UserInfoContainer>
-            <ActionButton userId={id} />
-        </Container>
-        <Separator color={colors.blue} width="80%" />
-    </>
-);
+}) => {
+    const route =
+        useRoute<RouteProp<StoryTabParamList, routes.addStoryMembers>>();
+    const { storyId } = route.params;
+    const { data: story } = useStoryQuery(storyId);
+    const { mutate: updateStory } = useStoryUpdateMutation(storyId);
+    const onPress = () => {
+        if (!story) {
+            return;
+        }
+        if (story.userIds.includes(id)) {
+            story.userIds = story.userIds.filter(userId => userId !== id);
+        } else {
+            story.userIds.push(id);
+        }
+        updateStory(story);
+    };
 
-const Container = styled.View({
+    const isInStory = story?.userIds.includes(id);
+    return (
+        <>
+            <Container onPress={onPress}>
+                <UserProfilePictureContainer>
+                    <Image
+                        uri={profilePicture}
+                        style={{ height: '100%', width: '100%' }}
+                    />
+                </UserProfilePictureContainer>
+                <UserInfoContainer>
+                    <BaseText>{username}</BaseText>
+                    <BaseText>{`${firstName} ${lastName}`}</BaseText>
+                </UserInfoContainer>
+                {isInStory && (
+                    <Icon name={'check'} size={20} color={colors.blue} />
+                )}
+            </Container>
+            <Separator color={colors.lightBlue} width="80%" />
+        </>
+    );
+};
+
+const Container = styled.TouchableOpacity({
     flex: 1,
-    width: '100%',
+    width: '90%',
     flexDirection: 'row',
     padding: 10,
+    marginRight: 10,
+    marginLeft: 10,
     alignItems: 'center',
 });
 

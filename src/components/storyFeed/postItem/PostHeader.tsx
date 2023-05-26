@@ -1,18 +1,25 @@
 import { FC } from 'react';
-import { PostInterface } from '@types';
+import { PostInterface, StoryTabNavigationProp } from '@types';
 import styled from 'styled-components/native';
 import { BaseText } from '@UI';
 import { Image } from '@UI/image';
 import { useDateFormat } from '@components/shared';
+import { useNavigation } from '@react-navigation/native';
+import { routes } from '@components';
 
 export const PostHeader: FC<Pick<PostInterface, 'author' | 'createdAt'>> = ({
     author,
     createdAt,
 }) => {
-    const { firstName, lastName, profilePicture } = author || {};
+    const { id, firstName, lastName, profilePicture } = author || {};
+    const navigation = useNavigation<StoryTabNavigationProp>();
+
+    const onPress = () => {
+        id && navigation.navigate(routes.userProfile, { id });
+    };
     return (
         <Container>
-            <UserContainer>
+            <UserContainer onPress={onPress}>
                 <Image
                     uri={profilePicture}
                     style={{
@@ -26,20 +33,19 @@ export const PostHeader: FC<Pick<PostInterface, 'author' | 'createdAt'>> = ({
                     <BaseText>{lastName}</BaseText>
                 </UserInfos>
             </UserContainer>
-            <BaseText>{useDateFormat(createdAt, false)}</BaseText>
+            <BaseText>{useDateFormat(createdAt, true)}</BaseText>
         </Container>
     );
 };
 
 const Container = styled.View({
-    width: '90%',
+    width: '100%',
     flexDirection: 'row',
-    margin: '5%',
     height: 50,
     alignItems: 'space-between',
 });
 
-const UserContainer = styled.View({
+const UserContainer = styled.TouchableOpacity({
     flex: 1,
     flexDirection: 'row',
 });

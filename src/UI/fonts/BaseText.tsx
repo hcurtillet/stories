@@ -15,7 +15,7 @@ interface ComponentProps {
 
 export const BaseText = styled.Text<ComponentProps>(
     ({ style, textAlign, color }) => ({
-        fontFamily: 'SourceSansPro-Black',
+        fontFamily: 'SourceSansPro-Regular',
         fontSize: 20,
         textAlign: textAlign || 'justify',
         color: color || 'black',

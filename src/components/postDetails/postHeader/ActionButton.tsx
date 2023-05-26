@@ -1,31 +1,31 @@
 import React, { FC } from 'react';
+import { PostInterface, StoryTabNavigationProp } from '@types';
+import { useDeletePostMutation } from '@api/posts';
+import { useNavigation } from '@react-navigation/native';
 import styled from 'styled-components/native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import { MenuView, NativeActionEvent } from '@react-native-menu/menu';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useTranslation } from 'react-i18next';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { StoryTabNavigationProp, StoryTabParamList } from '@types';
-import { routes } from '@components';
-import { useStoryDeleteMutation } from '@api/story';
 import { colors } from '@UI';
 
-export const ParamButton: FC = () => {
-    const { t } = useTranslation();
+export const ActionButton: FC<Pick<PostInterface, 'id' | 'storyId'>> = ({
+    id,
+    storyId,
+}) => {
     const navigation = useNavigation<StoryTabNavigationProp>();
-    const {
-        params: { id },
-    } = useRoute<RouteProp<StoryTabParamList, routes.story>>();
-    const { mutate: deleteStory } = useStoryDeleteMutation(
-        id,
-        navigation.goBack,
+    const { t } = useTranslation();
+    const { mutate: deletePost } = useDeletePostMutation(
+        id as string,
+        storyId,
+        () => navigation.goBack(),
     );
+
     const onPress = ({ nativeEvent }: NativeActionEvent) => {
         const { event } = nativeEvent;
         if (event === 'edit') {
-            navigation.navigate(routes.editStory, { id });
         }
         if (event === 'delete') {
-            deleteStory();
+            deletePost();
         }
     };
 
@@ -43,17 +43,13 @@ export const ParamButton: FC = () => {
                         },
                     },
                 ]}>
-                <Icon name={'ellipsis-h'} color={colors.white} size={30} />
+                <Icon name={'ellipsis-h'} color={colors.black} size={30} />
             </MenuContainer>
         </Container>
     );
 };
 
 const Container = styled.View({
-    width: '100%',
-    zIndex: 3,
-    padding: '5%',
-    position: 'absolute',
     alignItems: 'flex-end',
 });
 

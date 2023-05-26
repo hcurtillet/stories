@@ -8,7 +8,7 @@ export const postsMock: PostInterface[] = [
             {
                 id: '1',
                 author: userMock,
-                content: 'Comments 1',
+                content: 'comments 1',
                 createdAt: '2021-01-01',
             },
         ],
@@ -26,7 +26,7 @@ export const postsMock: PostInterface[] = [
             {
                 id: '1',
                 author: userMock,
-                content: 'Comments 1',
+                content: 'comments 1',
                 createdAt: '2021-01-01',
             },
         ],
@@ -43,7 +43,7 @@ export const postsMock: PostInterface[] = [
             {
                 id: '1',
                 author: userMock,
-                content: 'Comments 1',
+                content: 'comments 1',
                 createdAt: '2021-01-01',
             },
         ],
@@ -60,7 +60,7 @@ export const postsMock: PostInterface[] = [
             {
                 id: '1',
                 author: userMock,
-                content: 'Comments 1',
+                content: 'comments 1',
                 createdAt: '2021-01-01',
             },
         ],

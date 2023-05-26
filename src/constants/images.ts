@@ -1,2 +1,2 @@
-export const userPlaceholder = require('../../assests/images/user-placeholder.png');
-export const googleLogo = require('../../assests/images/google-logo.png');
+export const userPlaceholder = require('../../assets/images/user-placeholder.png');
+export const googleLogo = require('../../assets/images/google-logo.png');

@@ -13,7 +13,9 @@ export const Header: FC = () => {
     useEffect(() => {
         navigation.setOptions({
             headerLeft: !isNewStory ? GoBackButton : () => <View />,
-            headerTitle: () => <HeaderTitle titleKey={'story.addMembers'} />,
+            headerTitle: () => (
+                <HeaderTitle titleKey={'storyMembers.addMembers'} />
+            ),
         });
     }, [navigation, isNewStory]);
     return null;

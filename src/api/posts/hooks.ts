@@ -1,5 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { getPost, getPosts, postComment, postPost } from '@api/posts/queries';
+import {
+    deletePost,
+    getPost,
+    getPosts,
+    postComment,
+    postPost,
+} from './queries';
 
 export const usePostsQuery = (storyId: string) => {
     const queryKey = ['posts', { storyId }];
@@ -40,6 +46,23 @@ export const useCommentCreateMutation = (
     const options = {
         onSuccess: () => {
             queryClient.invalidateQueries(['post', { id: postId }]);
+            handleOnSuccess && handleOnSuccess();
+        },
+    };
+    return useMutation(mutationKey, mutationFn, options);
+};
+
+export const useDeletePostMutation = (
+    id: string,
+    storyId: string,
+    handleOnSuccess?: () => void,
+) => {
+    const queryClient = useQueryClient();
+    const mutationKey = ['post-delete'];
+    const mutationFn = deletePost(id);
+    const options = {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['posts', { storyId }]);
             handleOnSuccess && handleOnSuccess();
         },
     };

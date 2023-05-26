@@ -6,7 +6,7 @@ export const searchUsers =
     (searchTerm: string) => async (): Promise<UserInterface[]> => {
         try {
             const { data } = await client.get<UserDto[]>(
-                `users/search/${searchTerm.toLowerCase()}`,
+                `users/search/${searchTerm}`,
             );
             return data.map(formatToUser);
         } catch (error) {

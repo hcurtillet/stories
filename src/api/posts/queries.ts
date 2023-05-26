@@ -45,3 +45,11 @@ export const postComment =
             throw error;
         }
     };
+
+export const deletePost = (id: string) => async (): Promise<void> => {
+    try {
+        await client.delete(`/posts/${id}`);
+    } catch (error) {
+        throw error;
+    }
+};
