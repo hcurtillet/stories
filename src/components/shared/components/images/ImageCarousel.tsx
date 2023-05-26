@@ -4,24 +4,29 @@ import styled from 'styled-components/native';
 import { ImageZoomModal } from './ImageZoomModal';
 import { Image } from '@UI/image';
 import { colors } from '@UI';
+import { Dimensions } from 'react-native';
 
 interface ComponentProps {
     images: string[];
+    isPreview: boolean;
 }
 
-export const ImageCarousel: FC<ComponentProps> = ({ images }) => {
+export const ImageCarousel: FC<ComponentProps> = ({ images, isPreview }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [modalVisible, setModalVisible] = useState(false);
     const ref = useRef(null);
 
+    const { width } = Dimensions.get('window');
+
     const renderItem = ({ item }: { item: string }) => (
-        <ImageContainer onPress={() => setModalVisible(true)}>
+        <ImageContainer
+            isPreview={isPreview}
+            onPress={() => setModalVisible(true)}>
             <Image
                 style={{
                     alignSelf: 'center',
                     width: '100%',
                     height: '100%',
-                    borderRadius: 10,
                 }}
                 uri={item}
                 resizeMode="cover"
@@ -41,10 +46,10 @@ export const ImageCarousel: FC<ComponentProps> = ({ images }) => {
                         onSnapToItem={(index: SetStateAction<number>) =>
                             setActiveIndex(index)
                         }
-                        sliderWidth={400}
-                        itemWidth={358}
-                        layout={'stack'}
-                        layoutCardOffset={18}
+                        sliderWidth={isPreview ? 400 : width}
+                        itemWidth={isPreview ? 350 : width}
+                        layout={isPreview ? 'stack' : 'default'}
+                        layoutCardOffset={isPreview ? 18 : 0}
                     />
                     <ImageZoomModal
                         imageUrls={images}
@@ -67,10 +72,13 @@ const Container = styled.View({
     zIndex: 10,
 });
 
-const ImageContainer = styled.TouchableOpacity({
-    flex: 1,
-    width: '100%',
-    backgroundColor: colors.lightGrey,
-    borderRadius: 25,
-    aspectRatio: 1,
-});
+const ImageContainer = styled.TouchableOpacity<{ isPreview: boolean }>(
+    ({ isPreview }) => ({
+        flex: 1,
+        width: '100%',
+        backgroundColor: colors.lightGrey,
+        borderRadius: isPreview ? 10 : 0,
+        aspectRatio: 1,
+        overflow: 'hidden',
+    }),
+);

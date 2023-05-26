@@ -6,7 +6,16 @@ export type StoryInterface = {
     description: string;
     userIds: string[];
     users: UserInterface[];
-    thumbnails: string[];
+    cover: string;
     createdAt: string;
     createdBy: string;
+    memories: MemoryInterface[];
 };
+
+export interface MemoryInterface {
+    id: string;
+    medias: string[];
+    postId: string;
+    content: string;
+    postDate: string;
+}

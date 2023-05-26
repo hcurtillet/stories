@@ -1,40 +1,41 @@
 import React, { useEffect, useState } from 'react';
-import { ScreenContainer } from '@UI/screenContainer';
+import { ScreenContainer } from '@UI/containers';
 import { Loader } from '@UI/loader';
 import { routes } from '@components';
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { RootScreenNavigationProp } from '@types';
-import { useUserInfoQuery } from '@api/authentication';
-import { useReloadToken } from '@components/shared';
+import { client } from '@api/client';
 
 export const StartScreen = () => {
-    const [loading, setLoading] = useState<boolean>(true);
-    const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const navigation = useNavigation<RootScreenNavigationProp>();
-    const { refetch } = useUserInfoQuery();
-    useReloadToken();
 
     useEffect(() => {
-        if (!loading) {
+        if (auth().currentUser) {
+            auth()
+                .currentUser?.getIdTokenResult()
+                .then(token => {
+                    client.defaults.headers.common.Authorization = token.token;
+                    setIsAuthenticated(true);
+                    setIsLoading(false);
+                });
+        } else {
+            setIsLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (isLoading) {
             return;
         }
-        auth().onAuthStateChanged(userState => {
-            setUser(userState);
-            refetch();
-            if (loading) {
-                setLoading(false);
-            }
-        });
-    }, [loading]);
-
-    useEffect(() => {
-        if (user) {
+        if (isAuthenticated) {
             navigation.navigate(routes.app);
         } else {
             navigation.navigate(routes.login);
         }
-    }, [navigation, user]);
+    }, [navigation, isAuthenticated, isLoading]);
 
     return (
         <ScreenContainer>

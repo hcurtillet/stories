@@ -19,8 +19,11 @@ export const ImageZoomModal: FC<ComponentProps> = ({
     const [urls, setUrls] = React.useState<string[]>([]);
     useEffect(() => {
         const promises = imageUrls.map(async url => {
-            const uri = await storage().ref(url).getDownloadURL();
-            return uri;
+            if (url.startsWith('images/')) {
+                return await storage().ref(url).getDownloadURL();
+            } else {
+                return url;
+            }
         });
         Promise.all(promises).then(urls => {
             setUrls(urls);

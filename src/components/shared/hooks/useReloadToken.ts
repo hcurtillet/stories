@@ -4,11 +4,12 @@ import { client } from '@api/client';
 
 export const useReloadToken = () => {
     useEffect(() => {
-        (async () => {
-            const token = await auth().currentUser?.getIdToken();
-            if (token) {
-                client.defaults.headers.common['Authorization'] = `${token}`;
+        auth().onIdTokenChanged(async user => {
+            if (user) {
+                const idToken = await user.getIdToken();
+                client.defaults.headers.common.Authorization = `${idToken}`;
             }
-        })();
+            return null;
+        });
     });
 };

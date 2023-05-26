@@ -1,10 +1,11 @@
 import React from 'react';
-import { StoriesList, Header } from '@components/storiesList';
-import { ScreenContainer } from '@UI/screenContainer';
+import { StoriesList, Header, NewStoryButton } from '@components/storiesList';
+import { ScreenContainer } from '@UI/containers';
 
 export const StoriesScreen = () => (
     <ScreenContainer>
         <Header />
         <StoriesList />
+        <NewStoryButton />
     </ScreenContainer>
 );

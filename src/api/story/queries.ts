@@ -3,7 +3,7 @@ import { StoryInterface } from '@types';
 import { StoryDto } from '@api/shared';
 import { formatToStory } from '@api/shared/helpers';
 
-export const getStory = async (id: string): Promise<StoryInterface> => {
+export const getStory = (id: string) => async (): Promise<StoryInterface> => {
     try {
         const { data } = await client.get<StoryDto>(`/stories/${id}`);
         return formatToStory(data);
@@ -44,7 +44,7 @@ export const putStory = (id: string) => async (item: StoryInterface) => {
     }
 };
 
-export const deleteStory = async (id: string) => {
+export const deleteStory = (id: string) => async () => {
     try {
         return await client.delete(`/stories/${id}`);
     } catch (error) {

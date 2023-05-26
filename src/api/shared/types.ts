@@ -35,11 +35,12 @@ export interface StoryDto extends BaseDto {
     title: string;
     numberOfPosts: number;
     description: string;
-    thumbnails?: string[];
+    cover: string;
     userIds: string[];
     users?: UserDto[];
     createdAt: string;
     createdBy: string;
+    memories: MemoryDto[];
 }
 
 export interface UserDto extends BaseDto {
@@ -49,4 +50,10 @@ export interface UserDto extends BaseDto {
     email: string;
     profilePicture: string | null;
     storyIds: string[];
+}
+export interface MemoryDto extends BaseDto {
+    medias: string[];
+    postId: string;
+    content: string;
+    postDate: string;
 }

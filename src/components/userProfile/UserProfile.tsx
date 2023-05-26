@@ -1,18 +1,21 @@
 import React, { FC, useCallback } from 'react';
 import styled from 'styled-components/native';
 import { BaseText, LabeledText } from '@UI';
-import { useUserInfoQuery } from '@api/authentication';
 import { ProfilePicture } from '@components/userProfile/ProfilePicture';
-import { useNavigation } from '@react-navigation/native';
-import { ProfileTabNavigationProp } from '@types';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { ProfileTabNavigationProp, StoryTabParamList } from '@types';
 import { routes } from '@components';
 import { Button } from '@UI/button';
 import { useTranslation } from 'react-i18next';
 import { VerticalSpace } from '@UI/space';
+import { useUserInfoQuery } from '@api/users';
 
 export const UserProfile: FC = () => {
     const { t } = useTranslation();
-    const { data: user } = useUserInfoQuery();
+    const {
+        params: { id, isMyProfile },
+    } = useRoute<RouteProp<StoryTabParamList, routes.userProfile>>();
+    const { data: user } = useUserInfoQuery(id);
 
     const navigation = useNavigation<ProfileTabNavigationProp>();
 
@@ -36,11 +39,13 @@ export const UserProfile: FC = () => {
             <LabeledText>{t('profile.email')}</LabeledText>
             <BaseText>{user?.email}</BaseText>
             <VerticalSpace size={40} />
-            <Button
-                onPress={handleEditProfilePress}
-                title={t('profile.editProfile')}
-                icon={'pencil-alt'}
-            />
+            {isMyProfile && (
+                <Button
+                    onPress={handleEditProfilePress}
+                    title={t('profile.editProfile')}
+                    icon={'pencil-alt'}
+                />
+            )}
         </Container>
     );
 };

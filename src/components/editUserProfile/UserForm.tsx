@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUserInfoMutation, useUserInfoQuery } from '@api/authentication';
-import styled from 'styled-components/native';
-import { FormContainer } from '@UI/formContainer';
+import { FormContainer } from '@UI/containers';
 import { Loader } from '@UI/loader';
 import { Formik } from 'formik';
 import { ProfileTabNavigationProp, UserInterface } from '@types';
@@ -58,22 +57,22 @@ export const UserForm: FC = () => {
                         <FormContainer>
                             <ProfilePicture
                                 uri={values.profilePicture}
-                                onChange={handleChange}
+                                onChange={handleChange('profilePicture')}
                             />
                             <TextInput
-                                label={t('profile.username')}
+                                label={t('profile.username') as string}
                                 onChangeText={handleChange('username')}
                                 onBlur={handleBlur('username')}
                                 value={values.username ?? ''}
                             />
                             <TextInput
-                                label={t('profile.firstName')}
+                                label={t('profile.firstName') as string}
                                 onChangeText={handleChange('firstName')}
                                 onBlur={handleBlur('firstName')}
                                 value={values.firstName ?? ''}
                             />
                             <TextInput
-                                label={t('profile.lastName')}
+                                label={t('profile.lastName') as string}
                                 onChangeText={handleChange('lastName')}
                                 onBlur={handleBlur('lastName')}
                                 value={values.lastName ?? ''}
@@ -89,11 +88,3 @@ export const UserForm: FC = () => {
         </>
     );
 };
-
-const Container = styled.View({
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'red',
-    padding: 20,
-});

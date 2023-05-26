@@ -22,6 +22,8 @@
         "yes": "Oui",
         "no": "Non",
         "areYouSure": "Êtes-vous sûr ?",
+        "saveProfile": "Sauvegarder le profile",
+        "takePicture": "Prendre une photo"
     },
     "profile": {
         "header": "Mon profile",
@@ -40,8 +42,6 @@
             "errorWhileUpdatingProfile": "Erreur lors de la mise à jour du profile",
         },
         "editProfile": "Modifier le profile",
-        "saveProfile": "Sauvegarder le profile",
-        "takePicture": "Prendre une photo",
         "chooseFromLibrary": "Choisir depuis la bibliothèque",
         "errorUpdatingProfile": "Erreur lors de la mise à jour du profile",
         "successUpdatingProfile": "Profile mis à jour avec succès",
@@ -49,13 +49,15 @@
     "story": {
         "header": "Histoire",
         "newStory": "Nouvelle histoire",
+        "editStory": "Modifier l'histoire",
         "title": "Titre",
         "description": "Description",
         "errorMessage": {
             "titleIsRequired": "Le titre est requis",
             "descriptionIsRequired": "La description est requise",
             "errorWhileCreatingStory": "Erreur lors de la création de l'histoire",
-        }
+        },
+        "noPosts": "Aucun post",
     },
     "storyMembers": {
         "header": "Membres",
@@ -73,16 +75,45 @@
         "header": "Nouveau post",
         "placeholder": "Raconte quelque chose..."
     },
+    "postDetails": {
+        "header": "Détails du post",
+        "editPost": "Modifier le post",
+        "deletePost": "Supprimer le post",
+        "writeComment": "Écrire un commentaire...",
+        "errorMessage": {
+            "errorWhileDeletingPost": "Erreur lors de la suppression du post",
+        }
+    },
     "stories": {
         "header": "Histoires",
         "noStories": "Aucune histoire",
     },
     "date": {
-        "year": "{{count}} a.",
-        "month": "{{count}} m.",
-        "day": "{{count}} j.",
-        "hour": "{{count}} h.",
-        "minute": "{{count}} min.",
+        "year": {
+            "abbreviated": "{{count}} a.",
+            "singular": "Il y a un an",
+            "plural": "Il y a {{count}} ans"
+        },
+        "month": {
+            "abbreviated": "{{count}} m.",
+            "singular": "Il y a un mois",
+            "plural": "Il y a {{count}} mois"
+        },
+        "day": {
+            "abbreviated": "{{count}} j.",
+            "singular": "Hier",
+            "plural": "Il y a {{count}} jours"
+        },
+        "hour": {
+            "abbreviated": "{{count}} h.",
+            "singular": "Il y a une heure",
+            "plural": "Il y a {{count}} heures"
+        },
+        "minute": {
+            "abbreviated": "{{count}} min.",
+            "singular": "Il y a une minute",
+            "plural": "Il y a {{count}} minutes"
+        },
         "now": "maintenant"
     }
 }

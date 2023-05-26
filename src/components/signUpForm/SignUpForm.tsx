@@ -7,7 +7,7 @@ import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import { useTranslation } from 'react-i18next';
-import { FormContainer } from '@UI/formContainer';
+import { FormContainer } from '@UI/containers';
 import { TextInput } from '@UI/textInput';
 import { Button } from '@UI/button';
 import { ErrorMessage } from '@UI/errorMessage';

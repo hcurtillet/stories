@@ -8,6 +8,7 @@ import { initReactI18next } from 'react-i18next';
 import en from '@store/i18n/en.json';
 import fr from '@store/i18n/fr.json';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { useReloadToken } from '@components/shared';
 
 i18n.use(initReactI18next).init({
     resources: {
@@ -23,7 +24,14 @@ i18n.use(initReactI18next).init({
 });
 
 const queryClient = new QueryClient();
+
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+
+GoogleSignin.configure({
+    webClientId: '',
+});
 const App = () => {
+    useReloadToken();
     return (
         <QueryClientProvider client={queryClient}>
             <SafeAreaProvider>

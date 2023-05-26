@@ -13,3 +13,12 @@ export const searchUsers =
             throw error;
         }
     };
+
+export const getUserInfo = (id: string) => async (): Promise<UserInterface> => {
+    try {
+        const { data } = await client.get<UserDto>(`users/${id}`);
+        return formatToUser(data);
+    } catch (error) {
+        throw error;
+    }
+};

@@ -13,8 +13,10 @@ import {
     StoryDetailsScreen,
     NewPostScreen,
     EditProfileScreen,
-    NewStoryScreen,
     AddStoryMembersScreen,
+    PostDetailsScreen,
+    UserListScreen,
+    MemoryModal,
 } from '@screens';
 import {
     AppTabParamList,
@@ -38,10 +40,19 @@ export const StackNavigator = () => (
             <HomeStack.Screen name={routes.start} component={StartScreen} />
             <HomeStack.Screen name={routes.login} component={LoginScreen} />
             <HomeStack.Screen name={routes.signUp} component={SignUpScreen} />
-            <HomeStack.Screen name={routes.app} component={AppNavigator} />
+            <HomeStack.Screen name={routes.app} component={StoryNavigator} />
         </HomeStack.Navigator>
     </NavigationContainer>
 );
+// const shouldShowTabBar = (route: RouteProp<AppTabParamList>) => {
+//     const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+//     const hideOnScreen = [
+//         routes.newPost,
+//         routes.newStory,
+//         routes.postDetails,
+//     ] as string[];
+//     return !hideOnScreen.includes(routeName);
+// };
 export const AppNavigator = () => (
     <AppTab.Navigator
         screenOptions={({ route }) => ({
@@ -62,6 +73,7 @@ export const AppNavigator = () => (
                 return <Icon name={iconName} size={size} color={color} />;
             },
             headerShown: false,
+            tabBarLabelStyle: { display: 'none' },
         })}>
         <AppTab.Screen name={routes.storyStack} component={StoryNavigator} />
         <AppTab.Screen
@@ -85,12 +97,31 @@ const StoryNavigator = () => (
             name={routes.storyDetails}
             component={StoryDetailsScreen}
         />
-        <StoryStack.Screen name={routes.newStory} component={NewStoryScreen} />
         <StoryStack.Screen
             name={routes.addStoryMembers}
             component={AddStoryMembersScreen}
         />
         <StoryStack.Screen name={routes.newPost} component={NewPostScreen} />
+        <StoryStack.Screen
+            name={routes.postDetails}
+            component={PostDetailsScreen}
+        />
+        <StoryStack.Screen name={routes.userList} component={UserListScreen} />
+        <StoryStack.Screen
+            name={routes.userProfile}
+            component={ProfileScreen}
+        />
+        <ProfileStack.Screen
+            name={routes.editProfile}
+            component={EditProfileScreen}
+        />
+        <StoryStack.Screen
+            name={routes.memoryModal}
+            component={MemoryModal}
+            options={{
+                headerShown: false,
+            }}
+        />
     </StoryStack.Navigator>
 );
 
@@ -120,6 +151,9 @@ export enum routes {
     editStory = 'EditStory',
     editProfile = 'EditProfile',
     newPost = 'NewPost',
-    newStory = 'NewStory',
     addStoryMembers = 'AddStoryMembers',
+    postDetails = 'PostDetails',
+    userList = 'UserList',
+    userProfile = 'UserProfile',
+    memoryModal = 'MemoryModal',
 }

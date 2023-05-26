@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { routes } from '@components';
 import { login } from '@api/authentication';
-import { FormContainer } from '@UI/formContainer';
+import { FormContainer } from '@UI/containers';
 import { TextInput } from '@UI/textInput';
 import { Button } from '@UI/button';
 import { ErrorMessage } from '@UI/errorMessage';
@@ -27,7 +27,6 @@ export const LoginForm = () => {
                 navigation.navigate(routes.app);
             }
         } catch (error: any) {
-            console.log(error);
             if (error.code === 'auth/user-not-found') {
                 setErrorMessage(t('authentication.userNotFound'));
             }
@@ -45,13 +44,14 @@ export const LoginForm = () => {
             {({ handleChange, handleBlur, handleSubmit, values }) => (
                 <FormContainer>
                     <TextInput
-                        label={t('authentication.email')}
+                        label={t('authentication.email') as string}
                         onChangeText={handleChange('email')}
                         onBlur={handleBlur('email')}
                         value={values.email}
+                        keyboardType={'email-address'}
                     />
                     <TextInput
-                        label={t('authentication.password')}
+                        label={t('authentication.password') as string}
                         secureTextEntry={true}
                         onChangeText={handleChange('password')}
                         onBlur={handleBlur('password')}

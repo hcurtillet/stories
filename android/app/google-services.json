@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "503593468325",
+    "project_id": "stories-7b674",
+    "storage_bucket": "stories-7b674.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503593468325:android:89d5ee89b28cbf4ac5a84c",
+        "android_client_info": {
+          "package_name": "com.stories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "503593468325-6vn6juh5cihdjgaiockk7gb4mfiqf3oa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8nTOwscTbZlEX-sFOBY2_Hhi_gaw2_ts"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "503593468325-6vn6juh5cihdjgaiockk7gb4mfiqf3oa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "503593468325-7atq0dd8npchqufvaeuvk03hd66mpb68.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.hcurtillet.Stories"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

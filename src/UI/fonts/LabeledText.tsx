@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { colors } from '@UI';
+import { colors } from '../colors';
 import { BaseText } from './BaseText';
 
 export const LabeledText = styled(BaseText)({

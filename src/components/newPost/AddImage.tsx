@@ -9,6 +9,7 @@ import {
 } from 'react-native-image-picker';
 import { useAppDispatch, useAppSelector } from '@store';
 import { setMedias } from '@store/postSlice';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const options: CameraOptions = {
     mediaType: 'mixed',
@@ -18,6 +19,7 @@ const options: CameraOptions = {
 export const AddImages: FC = () => {
     const images = useAppSelector(state => state.post.medias);
     const dispatch = useAppDispatch();
+    const { bottom } = useSafeAreaInsets();
     const imageCallback = (item: ImagePickerResponse) => {
         const { assets } = item;
         if (assets) {
@@ -29,8 +31,8 @@ export const AddImages: FC = () => {
     };
 
     return (
-        <Container onPress={handlePress}>
-            <IconContainer>
+        <Container bottom={bottom}>
+            <IconContainer onPress={handlePress}>
                 <Icon
                     name={'camera'}
                     color={colors.blue}
@@ -42,20 +44,19 @@ export const AddImages: FC = () => {
     );
 };
 
-const Container = styled.TouchableOpacity({
+const Container = styled.View<{ bottom: number }>(({ bottom }) => ({
     width: '100%',
-    height: 70,
-    backgroundColor: colors.lightGrey,
+    height: 100,
     justifyContent: 'center',
     alignItems: 'center',
-});
+    marginBottom: bottom,
+}));
 
-const IconContainer = styled.View({
-    width: 50,
-    height: 50,
+const IconContainer = styled.TouchableOpacity({
+    width: 75,
+    height: 75,
     alignContent: 'center',
     justifyContent: 'center',
-    borderRadius: 25,
-    borderWidth: 2,
-    borderColor: colors.blue,
+    borderRadius: 50,
+    backgroundColor: colors.lightBlueButton,
 });

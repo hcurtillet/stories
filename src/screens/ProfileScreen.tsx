@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScreenContainer } from '@UI/screenContainer';
+import { ScreenContainer } from '@UI/containers';
 import { Header, UserProfile } from '@components/userProfile';
 
 export const ProfileScreen = () => (

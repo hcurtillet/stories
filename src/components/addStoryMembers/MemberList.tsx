@@ -5,7 +5,7 @@ import { selectSearchUser } from '@store/userSlice/searchUserSlice';
 import { useAppSelector } from '@store';
 import { useSearchUsers } from '@api/users';
 import { UserInterface } from '@types';
-import { UserItem } from '@components/addStoryMembers/UserItem';
+import { UserItem } from '@components/addStoryMembers/userItem';
 import { BaseText } from '@UI';
 import { FlatList } from 'react-native';
 import { Loader } from '@UI/loader';

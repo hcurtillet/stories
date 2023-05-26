@@ -1,17 +1,20 @@
 import { FC, useEffect } from 'react';
-import { StoryTabNavigationProp } from '@types';
-import { useNavigation } from '@react-navigation/native';
-import { GoBackButton } from '@components/shared';
-import { useTranslation } from 'react-i18next';
+import { StoryTabNavigationProp, StoryTabParamList } from '@types';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { GoBackButton, HeaderTitle } from '@components/shared';
+import { routes } from '@components';
+import { View } from 'react-native';
 
 export const Header: FC = () => {
     const navigation = useNavigation<StoryTabNavigationProp>();
-    const { t } = useTranslation();
+    const {
+        params: { isNewStory },
+    } = useRoute<RouteProp<StoryTabParamList, routes.addStoryMembers>>();
     useEffect(() => {
         navigation.setOptions({
-            headerLeft: GoBackButton,
-            title: t('storyMembers.header') as string,
+            headerLeft: !isNewStory ? GoBackButton : () => <View />,
+            headerTitle: () => <HeaderTitle titleKey={'story.addMembers'} />,
         });
-    }, [navigation]);
+    }, [navigation, isNewStory]);
     return null;
 };

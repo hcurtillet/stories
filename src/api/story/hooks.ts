@@ -1,4 +1,10 @@
-import { getStories, getStory, postStory, putStory } from './queries';
+import {
+    deleteStory,
+    getStories,
+    getStory,
+    postStory,
+    putStory,
+} from './queries';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { StoryInterface } from '@types';
 
@@ -11,7 +17,7 @@ export const useStoriesQuery = () => {
 
 export const useStoryQuery = (id: string) => {
     const queryKey = ['story', { id }];
-    const queryFn = () => getStory(id);
+    const queryFn = getStory(id);
     const options = {};
     return useQuery(queryKey, queryFn, options);
 };
@@ -20,7 +26,7 @@ export const useStoryCreateMutation = (
     handleOnSuccess?: (storyId: string) => void,
 ) => {
     const queryClient = useQueryClient();
-    const mutationKey = ['storyFeed-create'];
+    const mutationKey = ['story-create'];
     const mutationFn = postStory;
     const options = {
         onSuccess: (story: StoryInterface | null) => {
@@ -38,8 +44,25 @@ export const useStoryUpdateMutation = (
     handleOnSuccess?: () => void,
 ) => {
     const queryClient = useQueryClient();
-    const mutationKey = ['story', id];
+    const mutationKey = ['story-update', id];
     const mutationFn = putStory(id);
+    const options = {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['stories']);
+            queryClient.invalidateQueries(['story', { id }]);
+            handleOnSuccess && handleOnSuccess();
+        },
+    };
+    return useMutation(mutationKey, mutationFn, options);
+};
+
+export const useStoryDeleteMutation = (
+    id: string,
+    handleOnSuccess?: () => void,
+) => {
+    const queryClient = useQueryClient();
+    const mutationKey = ['story-delete', id];
+    const mutationFn = deleteStory(id);
     const options = {
         onSuccess: () => {
             queryClient.invalidateQueries(['stories']);

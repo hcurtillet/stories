@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { colors } from '@UI';
-import { ScreenContainer } from '@UI/screenContainer';
+import { ScreenContainer } from '@UI/containers';
 import { useNavigation } from '@react-navigation/native';
 import { StoryTabNavigationProp } from '@types';
 import { StoryCreate } from '@components/storyFeed';

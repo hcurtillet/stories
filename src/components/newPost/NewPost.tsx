@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { Loader } from '@UI/loader';
 import { NewPostFrom } from '@components/newPost/NewPostFrom';
 import { AddImages } from '@components/newPost/AddImage';
-import { ImagePreview } from '@components/newPost/ImagePreview';
+import { ImagePreview } from '@components/newPost/imagePreview';
 
 export const NewPost: FC = () => {
     const { isUploading } = useAppSelector(state => state.post);

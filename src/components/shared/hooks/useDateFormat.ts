@@ -1,10 +1,23 @@
 import { useTranslation } from 'react-i18next';
 
-export const useDateFormat = (date: string | undefined): string => {
+export const useDateFormat = (
+    date: string | undefined,
+    isAbbreviated: boolean,
+): string => {
     const { t } = useTranslation();
     if (!date) {
         return '';
     }
+
+    const generateKey = (primaryKey: string, count: number): string => {
+        if (isAbbreviated) {
+            return t(`${primaryKey}.abbreviated`, { count });
+        }
+        if (count === 1) {
+            return t(`${primaryKey}.singular`);
+        }
+        return t(`${primaryKey}.plural`, { count });
+    };
     const now = new Date();
     const dateObj = new Date(date);
     const diff = now.getTime() - dateObj.getTime();
@@ -17,20 +30,20 @@ export const useDateFormat = (date: string | undefined): string => {
         if (count === 0) {
             return t('date.now');
         }
-        return t('date.minute', { count });
+        return generateKey('date.minute', count);
     }
     if (days < 1) {
         const count = Math.round(hours);
-        return t('date.hour', { count });
+        return generateKey('date.hour', count);
     }
     if (months < 1) {
         const count = Math.round(days);
-        return t('date.day', { count });
+        return generateKey('date.day', count);
     }
     if (years < 1) {
         const count = Math.round(months);
-        return t('date.month', { count });
+        return generateKey('date.month', count);
     }
     const count = Math.round(years);
-    return t('date.year', { count });
+    return generateKey('date.year', count);
 };

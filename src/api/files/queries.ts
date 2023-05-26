@@ -17,7 +17,8 @@ export const uploadImage = async (item: Asset): Promise<string> => {
         if (result.state !== 'success') {
             throw Error('Failed to upload');
         }
-        return result.metadata.fullPath;
+        const url = await storageRef.getDownloadURL();
+        return url;
     } catch (e) {
         throw Error(e as string);
     }

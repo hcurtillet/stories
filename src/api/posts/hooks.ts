@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { getPosts, postPost } from '@api/posts/queries';
+import { getPost, getPosts, postComment, postPost } from '@api/posts/queries';
 
 export const usePostsQuery = (storyId: string) => {
     const queryKey = ['posts', { storyId }];
@@ -8,6 +8,12 @@ export const usePostsQuery = (storyId: string) => {
     return useQuery(queryKey, queryFn, options);
 };
 
+export const usePostQuery = (id: string) => {
+    const queryKey = ['post', { id }];
+    const queryFn = getPost(id);
+    const options = {};
+    return useQuery(queryKey, queryFn, options);
+};
 export const usePostCreateMutation = (
     storyId: string,
     handleOnSuccess?: () => void,
@@ -18,6 +24,22 @@ export const usePostCreateMutation = (
     const options = {
         onSuccess: () => {
             queryClient.invalidateQueries(['posts', { storyId }]);
+            handleOnSuccess && handleOnSuccess();
+        },
+    };
+    return useMutation(mutationKey, mutationFn, options);
+};
+
+export const useCommentCreateMutation = (
+    postId: string,
+    handleOnSuccess?: () => void,
+) => {
+    const queryClient = useQueryClient();
+    const mutationKey = ['comment-create'];
+    const mutationFn = postComment(postId);
+    const options = {
+        onSuccess: () => {
+            queryClient.invalidateQueries(['post', { id: postId }]);
             handleOnSuccess && handleOnSuccess();
         },
     };

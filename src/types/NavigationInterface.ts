@@ -23,11 +23,15 @@ export type AppTabNavigationProp = NativeStackNavigationProp<AppTabParamList>;
 export type StoryTabParamList = {
     Story: { id: string };
     Stories: undefined;
-    EditStory: { id: string };
+    EditStory: undefined | { id: string };
     StoryDetails: { id: string };
     NewPost: { storyId: string };
-    NewStory: undefined;
-    AddStoryMembers: { storyId: string };
+    AddStoryMembers: { storyId: string; isNewStory: boolean };
+    PostDetails: { id: string };
+    UserList: { storyId: string };
+    UserProfile: { id: string; isMyProfile?: boolean };
+    EditProfile: undefined;
+    MemoryModal: { memoryIndex: number };
 };
 
 export type StoryTabNavigationProp =
